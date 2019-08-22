@@ -1,0 +1,42 @@
+{
+  "name": "tile-frame",
+  "version": "0.0.0",
+  "description": "Manage a grid of map tiles on an HTML Canvas",
+  "main": "dist/tile-frame.bundle.js",
+  "module": "dist/tile-frame.bundle.js",
+  "files": [
+    "dist"
+  ],
+  "directories": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build-module && npm run build-examples",
+    "build-module": "npm run rollup-module",
+    "rollup-module": "rollup -c build/rollup.config.js",
+    "build-examples": "npm run rollup-examples && npm run copy-worker",
+    "rollup-examples": "cd examples && rollup -c",
+    "copy-worker": "echo examples/*/ | xargs -n 1 cp node_modules/tilekiln/dist/worker.bundle.js",
+    "postversion": "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jjhembd/tile-frame"
+  },
+  "bugs": {
+    "url": "https://github.com/jjhembd/tile-frame/issues"
+  },
+  "author": "Jeshurun Hembd",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^0.11.1",
+    "map-overlay": "github:jjhembd/map-overlay",
+    "rollup": "^1.19.4",
+    "rollup-plugin-commonjs": "^10.0.2",
+    "rollup-plugin-node-resolve": "^4.2.4",
+    "tilekiln": "github:jjhembd/tilekiln",
+    "tile-rack": "github:jjhembd/tile-rack",
+    "touchy": "github:jjhembd/touchy",
+    "@turf/boolean-point-in-polygon": "^6.0.1"
+  },
+  "dependencies": {}
+}

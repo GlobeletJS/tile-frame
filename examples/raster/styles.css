@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  border: 0;
+  margin: 20;
+}
+div.canvasLayers {
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+canvas {
+  width: 1024px;
+  height: 768px;
+  padding: 0;
+}
+#rasterCanvas {
+  background-color: #000099;
+  left: 0;
+  top: 0;
+  z-index: 0;
+}
+#vectorCanvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+#glOffScreen {
+  display: block;
+  visibility: hidden;
+  z-index: 0;
+}
+#coordinates {
+  display: block;
+  width: 32ch;
+  text-align: left;
+  color: white;
+  background-color: rgba(34, 34, 34, 0.5);
+  font-family: "Lucida Console", monospace;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 3;
+}
+#completion {
+  display: inline-block;
+  width: 40ch;
+  text-align: left;
+}

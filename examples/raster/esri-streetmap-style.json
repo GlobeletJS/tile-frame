@@ -1,0 +1,16 @@
+{
+  "version": 8,
+  "name": "ESRI World Street Map",
+  "sources": {
+    "esri-streetmap": {
+      "type": "raster",
+      "tiles": [ 
+        "http://services.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}" 
+      ],
+      "tileSize": 256
+    }
+  },
+  "layers": [
+    { "id": "streetmap", "type": "raster", "source": "esri-streetmap" }
+  ]
+}

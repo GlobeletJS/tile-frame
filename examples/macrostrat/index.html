@@ -1,0 +1,38 @@
+<html>
+
+  <head>
+    <title>tile-frame</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="icon" type="image/png" href="splitearth_v12b.png">
+    <script src="main.min.js"></script>
+  </head>
+
+  <body onload="macrostrat.main()">
+    <div id="map">
+
+      <canvas id="rasterCanvas"></canvas>
+
+      <div id="topleft">
+        <button id="zoomOut" class="nav">-</button>
+        <button id="zoomIn" class="nav">+</button>
+      </div>
+
+      <div id="completion"></div>
+
+      <button id="up" class="nav">^</button>
+      <button id="down" class="nav">v</button>
+      <button id="left" class="nav">&lt;</button>
+      <button id="right" class="nav">&gt;</button>
+
+      <div id = "tooltip"></div>
+
+      <div id="bottomright">
+        <button id="toggleBurwell">Toggle Burwell Visibility</button>
+      </div>
+
+    </div>
+
+    <div id="info">Feature info will appear here</div>
+  </body>
+
+</html>

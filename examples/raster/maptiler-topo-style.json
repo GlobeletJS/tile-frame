@@ -1,0 +1,16 @@
+{
+  "version": 8,
+  "name": "MapTiler Topo",
+  "sources": {
+    "maptiler": {
+      "type": "raster",
+      "tiles": [ 
+        "https://api.maptiler.com/maps/topo/{z}/{x}/{y}.png?key=x3YrAI3d568DC0IrcVDs" 
+      ],
+      "tileSize": 512
+    }
+  },
+  "layers": [
+    { "id": "topo", "type": "raster", "source": "maptiler" }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "version": 8,
+  "name": "Mapbox Streets Raster",
+  "sources": {
+    "mapbox": {
+      "type": "raster",
+      "tiles": [
+        "https://api.mapbox.com/styles/v1/jhembd/cjuolqfz607ws1fmt0d8my92y/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamhlbWJkIiwiYSI6ImNqcHpueHpyZjBlMjAzeG9kNG9oNzI2NTYifQ.K7fqhk2Z2YZ8NIV94M-5nA"
+      ],
+      "tileSize": 256
+    }
+  },
+  "layers": [
+    { "id": "streets", "type": "raster", "source": "mapbox" }
+  ]
+}
