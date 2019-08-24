@@ -1,12 +1,12 @@
 'use strict';
 
-import * as tileKiln from 'tilekiln';
-import * as tileRack from 'tile-rack';
+import { initTileFactory } from "./tile.js";
+import { initCache } from 'tile-rack';
 import * as tileFrame from "../../dist/tile-frame.bundle.js";
-//import { params } from "./mapbox-satellite.js";
 //import { params } from "./maptiler-topo.js";
 //import { params } from "./esri-streetmap.js";
-import { params } from "./mapbox-streets.js";
+import { params } from "./mapbox-satellite.js";
+//import { params } from "./mapbox-streets.js";
 import * as projection from "./proj-mercator.js";
 import * as mapOverlay from 'map-overlay';
 
@@ -15,13 +15,9 @@ const degrees = 180.0 / Math.PI;
 export function main() {
   // Setup 2D map
   const display = document.getElementById("rasterCanvas").getContext("2d");
-  const factory = tileKiln.init({
-    size: params.tileSize,
-    style: params.style,
-    token: params.token,
-  });
-  const cache = tileRack.init(params.tileSize, factory);
-  const map = tileFrame.init(params, display, cache);
+  const factory = initTileFactory(params.endpoint);
+  const cache = initCache(params.tileSize, factory);
+  const map = tileFrame.init(params, display, cache.retrieve);
 
   const overlay = document.getElementById("vectorCanvas");
   const boxQC = mapOverlay.init(overlay, map, params.width, params.height);

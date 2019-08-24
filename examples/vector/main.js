@@ -1,7 +1,7 @@
 'use strict';
 
 import * as tileKiln from 'tilekiln';
-import * as tileRack from 'tile-rack';
+import { cacheTileKiln } from 'tile-rack';
 import * as tileFrame from "../../dist/tile-frame.bundle.js";
 import { params } from "./mapbox-streets.js";
 //import { params } from "./mapbox-ukiyo-e.js";
@@ -18,8 +18,8 @@ export function main() {
     style: params.style,
     token: params.token,
   });
-  const cache = tileRack.init(params.tileSize, factory);
-  const map = tileFrame.init(params, display, cache);
+  const cache = cacheTileKiln(params.tileSize, factory);
+  const map = tileFrame.init(params, display, cache.retrieve);
 
   // Set up bounding box QC overlay
   const overlay = document.getElementById("vectorCanvas");
@@ -76,6 +76,9 @@ export function main() {
   requestAnimationFrame(checkRender);
   function checkRender(time) {
     map.drawTiles();
+    cache.prune(map.tileDistance, 2.0);
+    factory.sortTasks(cache.getPriority);
+
     var percent = map.loaded() * 100;
     if (percent < 100) {
       loaded.innerHTML = "Loading: " + percent.toFixed(0) + "%";

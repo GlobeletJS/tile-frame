@@ -1,6 +1,5 @@
 export const params = Object.freeze({
-  // URL of a Mapbox Style document
-  style: "./maptiler-topo-style.json",
+  endpoint: "https://api.maptiler.com/maps/topo/{z}/{x}/{y}.png?key=x3YrAI3d568DC0IrcVDs",
 
   // Number of zoom levels
   maxZoom: 20,
@@ -11,4 +10,8 @@ export const params = Object.freeze({
   // Size of map to display, in pixels
   width: 1024,
   height: 1024,
+
+  // Initial position of the map
+  center: [0.5, 0.5],
+  zoom: 1,
 });
