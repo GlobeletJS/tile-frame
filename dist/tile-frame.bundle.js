@@ -281,7 +281,7 @@ function init(userParams, context, getTile) {
   return {
     // Report status or data
     loaded: () => complete,
-    boxes,
+    getTilePos,
     // Methods to clear or update the canvas
     reset,
     clear,
@@ -300,6 +300,26 @@ function init(userParams, context, getTile) {
     // Metric to evaluate distance of a tile from the current grid
     tileDistance: initTileMetric(params, coords.getZXY),
   };
+
+  function getTilePos(mapXY) {
+    // Get indices to the tile box
+    let fx = mapXY[0] / params.tileSize;
+    let fy = mapXY[1] / params.tileSize;
+    let ix = Math.floor(fx);
+    let iy = Math.floor(fy);
+
+    // Get the tile box itself
+    let box = (boxes[iy]) ? boxes[iy][ix] : undefined;
+    if (!box) return;
+
+    // Compute position and scaling within the tile
+    let x = (fx - ix) * box.sw + box.sx;
+    let y = (fy - iy) * box.sw + box.sy;
+    let frac = box.sw / params.tileSize; // Fraction of the tile being used
+
+    // Return the tile along with the projected position and scaling info
+    return { x, y, frac, tile: box.tile };
+  }
 
   function reset() {
     //boxes.fill([]); // Doesn't work... not sure why not

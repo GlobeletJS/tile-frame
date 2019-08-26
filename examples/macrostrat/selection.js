@@ -1,37 +1,16 @@
 import booleanPointInPolygon from '@turf/boolean-point-in-polygon';
 
-export function initSelector(size, boxes) {
-  // This closure just stores the tile size and a link to the tile boxes
+export function initSelector(size, map) {
+  // This closure just stores the tile size and a link to the map
 
-  return {
-    getTilePos,
-    select,
-  };
-
-  function getTilePos(mapX, mapY) {
-    // Compute tile index
-    var ix = Math.floor(mapX / size);
-    var iy = Math.floor(mapY / size);
-
-    // Get a link to the tile box
-    if (!boxes[iy]) return;
-    var box = boxes[iy][ix];
+  return function(mapX, mapY, threshold, source, layer) {
+    // Get the tile at the [mapX, mapY] position, along with the
+    // x/y projected to tile coordinates
+    var box = map.getTilePos([mapX, mapY]);
     if (!box) return;
 
-    // Compute pixel within tile
-    var frac = box.sw / size;  // Fraction of the tile we will use
-    var tileX = (mapX - ix * size) * frac + box.sx;
-    var tileY = (mapY - iy * size) * frac + box.sy;
-
-    return { x: tileX, y: tileY, z: box.tile.z, frac, tile: box.tile };
-  }
-
-  function select(mapX, mapY, threshold, source, layer) {
-    var tPos = getTilePos(mapX, mapY);
-    if (!tPos) return;
-
     // Get a link to the features from the requested layer
-    var layers = tPos.tile.sources[source];
+    var layers = box.tile.sources[source];
     if (!layers) return;
     // TODO: Make sure it's a vector source?
     var data = layers[layer];
@@ -46,11 +25,11 @@ export function initSelector(size, boxes) {
       case "Point":
         // Scale the threshold by frac to make it a displayed distance
         // rather than a distance in local tile coordinates
-        feature = findNearest(tPos.x, tPos.y, threshold * tPos.frac, features);
+        feature = findNearest(box.x, box.y, threshold * box.frac, features);
         break;
       case "Polygon":
       case "MultiPolygon":
-        var pt = [tPos.x, tPos.y];
+        var pt = [box.x, box.y];
         feature = features.find(poly => booleanPointInPolygon(pt, poly));
         break;
       default:
@@ -66,30 +45,30 @@ export function initSelector(size, boxes) {
       // Transform the feature coordinates from tile coordinates back to 
       //  global map coordinates.  TODO: Make this work for Polygons?
       var coords = feature.geometry.coordinates;
-      var numTiles = 2 ** tPos.tile.z;
-      coords[0] = (tPos.tile.x + coords[0] / size) / numTiles;
-      coords[1] = (tPos.tile.y + coords[1] / size) / numTiles;
+      var numTiles = 2 ** box.tile.z;
+      coords[0] = (box.tile.x + coords[0] / size) / numTiles;
+      coords[1] = (box.tile.y + coords[1] / size) / numTiles;
     }
 
     return feature;
   }
+}
 
-  function findNearest(x, y, threshold, features) {
-    var minDistance = Infinity;
-    var minIndex = 0;
+function findNearest(x, y, threshold, features) {
+  var minDistance = Infinity;
+  var minIndex = 0;
 
-    features.forEach(checkDistance);
+  features.forEach(checkDistance);
 
-    function checkDistance(feature, index) {
-      var p = feature.geometry.coordinates;
-      var distance = Math.sqrt( (p[0] - x)**2 + (p[1] - y)**2 );
-      if (distance < minDistance) {
-        minDistance = distance;
-        minIndex = index;
-      }
+  function checkDistance(feature, index) {
+    var p = feature.geometry.coordinates;
+    var distance = Math.sqrt( (p[0] - x)**2 + (p[1] - y)**2 );
+    if (distance < minDistance) {
+      minDistance = distance;
+      minIndex = index;
     }
-
-    if (minDistance > threshold) return;
-    return features[minIndex];
   }
+
+  if (minDistance > threshold) return;
+  return features[minIndex];
 }

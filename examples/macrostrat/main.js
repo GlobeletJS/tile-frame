@@ -58,7 +58,7 @@ export function main() {
   }, false);
 
   // Get ready to print out feature info
-  const selector = initSelector(params.tileSize, map.boxes);
+  const selector = initSelector(params.tileSize, map);
   var info = document.getElementById("info");
 
   // Start animation loop
@@ -78,7 +78,7 @@ export function main() {
     var box = mapDiv.getBoundingClientRect();
     var x = cursor.x() - box.left;
     var y = cursor.y() - box.top;
-    var selected = selector.select(x, y, 5, "burwell", "units");
+    var selected = selector(x, y, 5, "burwell", "units");
 
     info.innerHTML = "Active draw calls: " + factory.activeDrawCalls() + "<br>";
 
