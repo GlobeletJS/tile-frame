@@ -275,8 +275,7 @@ function init(userParams, context, getTile) {
   const oneTileComplete = 1. / params.nx / params.ny;
   var complete = 0.0;
 
-  const boxes = []; //Array(params.ny).fill([]);
-  reset();
+  const boxes = Array.from(Array(params.ny), () => []);
 
   return {
     // Report status or data
@@ -322,10 +321,7 @@ function init(userParams, context, getTile) {
   }
 
   function reset() {
-    //boxes.fill([]); // Doesn't work... not sure why not
-    for (let iy = 0; iy < params.ny; iy++) {
-      boxes[iy] = [];
-    }
+    boxes.forEach(row => { row.length = 0; });
     complete = 0.0;
   }
   function clear() { // TODO: Do we ever need reset without clear?
