@@ -12,10 +12,10 @@ The low-resolution tiles will be replaced at a subsequent call to drawTiles(),
 if the cache has been updated.
 
 ## Examples
-- [Simple raster tiles example](https://jjhembd.github.io/tile-frame/examples/raster/index.html)
-- [Vector tiles example](https://jjhembd.github.io/tile-frame/examples/vector/index.html) 
-  (using [tilekiln](https://github.com/jjhembd/tilekiln) for rendering)
-- [Interactive vector tiles example](https://jjhembd.github.io/tile-frame/examples/macrostrat/index.html) with JSON querying
+- [Simple raster tiles example](https://globeletjs.github.io/tile-frame/examples/raster/index.html)
+- [Vector tiles example](https://globeletjs.github.io/tile-frame/examples/vector/index.html) 
+  (using [tile-kiln](https://github.com/GlobeletJS/tile-kiln) for rendering)
+- [Interactive vector tiles example](https://globeletjs.github.io/tile-frame/examples/macrostrat/index.html) with JSON querying
 
 ## Initialization
 tileFrame.init takes three parameters:

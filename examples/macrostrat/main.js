@@ -1,6 +1,6 @@
 'use strict';
 
-import * as tileKiln from 'tilekiln';
+import * as tileKiln from 'tile-kiln';
 import { cacheTileKiln } from 'tile-rack';
 import * as tileFrame from "../../dist/tile-frame.bundle.js";
 import { params } from "./macrostrat.js";
@@ -65,7 +65,7 @@ export function main() {
   requestAnimationFrame(checkRender);
   function checkRender(time) {
     map.drawTiles();
-    cache.prune(map.tileDistance, 1.5);
+    var numTiles = cache.prune(map.tileDistance, 1.5);
     factory.sortTasks(cache.getPriority);
 
     // Report loading status
@@ -81,6 +81,7 @@ export function main() {
     var selected = selector(x, y, 5, "burwell", "units");
 
     info.innerHTML = "Active draw calls: " + factory.activeDrawCalls() + "<br>";
+    info.innerHTML += "Tiles in cache: " + numTiles + "<br>";
 
     info.innerHTML += (selected && selected.properties)
       ? "<pre>" + JSON.stringify(selected.properties, null, 2) + "</pre>"

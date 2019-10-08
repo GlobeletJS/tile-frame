@@ -1,6 +1,6 @@
 'use strict';
 
-import * as tileKiln from 'tilekiln';
+import * as tileKiln from 'tile-kiln';
 import { cacheTileKiln } from 'tile-rack';
 import * as tileFrame from "../../dist/tile-frame.bundle.js";
 import { params } from "./mapbox-streets.js";

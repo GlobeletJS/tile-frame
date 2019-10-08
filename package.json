@@ -15,27 +15,28 @@
     "rollup-module": "rollup -c build/rollup.config.js",
     "build-examples": "npm run rollup-examples && npm run copy-worker",
     "rollup-examples": "cd examples && rollup -c",
-    "copy-worker": "echo examples/*/ | xargs -n 1 cp node_modules/tilekiln/dist/worker.bundle.js",
+    "copy-worker": "echo examples/*/ | xargs -n 1 cp node_modules/tile-kiln/dist/worker.bundle.js",
     "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jjhembd/tile-frame"
+    "url": "https://github.com/GlobeletJS/tile-frame"
   },
   "bugs": {
-    "url": "https://github.com/jjhembd/tile-frame/issues"
+    "url": "https://github.com/GlobeletJS/tile-frame/issues"
   },
+  "homepage": "https://github.com/GlobeletJS/tile-frame#readme",
   "author": "Jeshurun Hembd",
   "license": "MIT",
   "devDependencies": {
     "@turf/boolean-point-in-polygon": "^6.0.1",
     "http-server": "^0.11.1",
     "map-overlay": "github:jjhembd/map-overlay",
-    "rollup": "^1.19.4",
-    "rollup-plugin-commonjs": "^10.0.2",
+    "rollup": "^1.23.1",
+    "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^4.2.4",
-    "tile-rack": "0.0.2",
-    "tilekiln": "github:jjhembd/tilekiln",
+    "tile-kiln": "^0.1.2",
+    "tile-rack": "^0.2.1",
     "touchy": "github:jjhembd/touchy"
   },
   "dependencies": {}

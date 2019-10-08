@@ -1,7 +1,6 @@
 'use strict';
 
-import { initTileFactory } from "./tile.js";
-import { initCache } from 'tile-rack';
+import { initRasterCache } from 'tile-rack';
 import * as tileFrame from "../../dist/tile-frame.bundle.js";
 //import { params } from "./maptiler-topo.js";
 //import { params } from "./esri-streetmap.js";
@@ -12,11 +11,14 @@ import * as mapOverlay from 'map-overlay';
 
 const degrees = 180.0 / Math.PI;
 
+function getURL(z, x, y) {
+  return params.endpoint.replace(/{z}/, z).replace(/{y}/, y).replace(/{x}/, x);
+}
+
 export function main() {
   // Setup 2D map
   const display = document.getElementById("rasterCanvas").getContext("2d");
-  const factory = initTileFactory(params.endpoint);
-  const cache = initCache(params.tileSize, factory);
+  const cache = initRasterCache(params.tileSize, getURL);
   const map = tileFrame.init(params, display, cache.retrieve);
 
   const overlay = document.getElementById("vectorCanvas");
