@@ -37,7 +37,7 @@
     "rollup-plugin-node-resolve": "^4.2.4",
     "tile-kiln": "^0.1.2",
     "tile-rack": "^0.2.1",
-    "touchy": "github:jjhembd/touchy"
+    "touch-sampler": "0.0.1"
   },
   "dependencies": {}
 }

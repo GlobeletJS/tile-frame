@@ -4,7 +4,7 @@ import * as tileKiln from 'tile-kiln';
 import { cacheTileKiln } from 'tile-rack';
 import * as tileFrame from "../../dist/tile-frame.bundle.js";
 import { params } from "./macrostrat.js";
-import { initTouchy } from 'touchy';
+import { initTouch } from 'touch-sampler';
 import { initSelector } from "./selection.js";
 
 export function main() {
@@ -22,7 +22,7 @@ export function main() {
   const map = tileFrame.init(params, display, cache.retrieve);
 
   // Set up mouse tracking
-  const cursor = initTouchy(mapDiv);
+  const cursor = initTouch(mapDiv);
 
   // Setup panning controls
   var up = document.getElementById("up");
