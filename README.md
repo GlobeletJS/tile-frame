@@ -18,13 +18,11 @@ if the cache has been updated.
 - [Interactive vector tiles example](https://globeletjs.github.io/tile-frame/examples/macrostrat/index.html) with JSON querying
 
 ## Initialization
-tileFrame.init takes three parameters:
-- Parameters object
-- 2D rendering context ([CanvasRenderingContext2D] object) for the target canvas
-- tile cache retrieve method, which must have an API as described below
-
-### Options for the supplied parameters object
-The parameters object may contain the following properties:
+tileFrame.init takes a parameters object with the following properties:
+- getTile: (REQUIRED) A tile cache retrieve method, which must have an API 
+  as described below
+- context: 2D rendering context ([CanvasRenderingContext2D] object) for the 
+  target canvas. If not supplied, tile-frame will create its own canvas
 - tileSize: size in pixels of the supplied *square* tiles. Default: 512
 - width, height: pixel size of the displayed map. MUST be multiple of tileSize.
   Default: dimensions of the drawingbuffer of the supplied context.canvas
@@ -56,6 +54,7 @@ NOTE: The cache MUST return the tile *synchronously*.
 ## tile-frame API
 Initialization returns an object with the following properties and methods:
 - Properties exposing status or data
+  - canvas: A back-link to the canvas on which the map is rendered
   - loaded(): Returns the loading status (between 0 and 1) of the tiles in the
   grid. If some of the tiles on the map are drawn with a stretched parent tile, 
   those tiles are not counted as done.
@@ -64,7 +63,8 @@ Initialization returns an object with the following properties and methods:
   - reset(): Clear the tile boxes at every grid point, forcing the tiles to be
   re-requested from the tile cache at the next call to drawTiles
   - clear(): Execute reset(), and clears the canvas
-  - drawTiles(): method to draw tiles on the canvas (no arguments)
+  - drawTiles(): method to draw tiles on the canvas (no arguments). Returns
+  a (Boolean) flag indicating whether the canvas has changed
 - Coordinate methods to set the position and zoom of the map
   - move(dz, dx, dy): Pan or zoom by the supplied *integer* coordinate deltas
   - fitBoundingBox(p1, p2): Find the smallest map that encloses the box

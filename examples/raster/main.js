@@ -2,10 +2,7 @@
 
 import { initRasterCache } from 'tile-rack';
 import * as tileFrame from "../../dist/tile-frame.bundle.js";
-//import { params } from "./maptiler-topo.js";
-//import { params } from "./esri-streetmap.js";
 import { params } from "./mapbox-satellite.js";
-//import { params } from "./mapbox-streets.js";
 import * as projection from "./proj-mercator.js";
 import * as mapOverlay from 'map-overlay';
 
@@ -17,9 +14,10 @@ function getURL(z, x, y) {
 
 export function main() {
   // Setup 2D map
-  const display = document.getElementById("rasterCanvas").getContext("2d");
   const cache = initRasterCache(params.tileSize, getURL);
-  const map = tileFrame.init(params, display, cache.retrieve);
+  params.getTile = cache.retrieve;
+  params.context = document.getElementById("rasterCanvas").getContext("2d");
+  const map = tileFrame.init(params);
 
   const overlay = document.getElementById("vectorCanvas");
   const boxQC = mapOverlay.init(overlay, map, params.width, params.height);

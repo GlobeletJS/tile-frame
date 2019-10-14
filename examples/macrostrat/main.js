@@ -12,14 +12,15 @@ export function main() {
   const mapDiv = document.getElementById("map");
 
   // Setup 2D map
-  const display = document.getElementById("rasterCanvas").getContext("2d");
   const factory = tileKiln.init({
     size: params.tileSize,
     style: params.style,
     token: params.token,
   });
   const cache = cacheTileKiln(params.tileSize, factory);
-  const map = tileFrame.init(params, display, cache.retrieve);
+  params.getTile = cache.retrieve;
+  params.context = document.getElementById("rasterCanvas").getContext("2d");
+  const map = tileFrame.init(params);
 
   // Set up mouse tracking
   const cursor = initTouch(mapDiv);

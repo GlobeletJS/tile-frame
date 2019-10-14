@@ -1,4 +1,4 @@
-export const params = Object.freeze({
+export const params = {
   endpoint: "https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamhlbWJkIiwiYSI6ImNqcHpueHpyZjBlMjAzeG9kNG9oNzI2NTYifQ.K7fqhk2Z2YZ8NIV94M-5nA",
   
   // Number of zoom levels
@@ -14,4 +14,4 @@ export const params = Object.freeze({
   // Initial position of the map
   center: [0.5, 0.375],
   zoom: 2,
-});
+};

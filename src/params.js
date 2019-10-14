@@ -1,10 +1,18 @@
-export function setParams(userParams, context) {
-  const params = {
-    tileSize: userParams.tileSize || 512,
-    width: userParams.width || context.canvas.width,
-    height: userParams.height || context.canvas.height,
-    center: userParams.center || [0.5, 0.5], // X, Y in map coordinates
-  };
+export function setParams(userParams) {
+  const params = {};
+
+  params.tileSize = userParams.tileSize || 512;
+
+  // Get canvas context, and set width/height parameters
+  if (userParams.context) {
+    params.context = userParams.context;
+    params.width = userParams.width || params.context.canvas.width;
+    params.height = userParams.height || params.context.canvas.height;
+  } else {
+    params.context = document.createElement("canvas").getContext("2d");
+    params.width = userParams.width || 1024;
+    params.height = userParams.height || 1024;
+  }
 
   // Compute number of tiles in each direction.
   params.nx = Math.floor(params.width / params.tileSize);
@@ -32,6 +40,8 @@ export function setParams(userParams, context) {
     : Math.floor(userParams.zoom);
   params.zoom = Math.min(Math.max(params.minZoom, params.zoom), params.maxZoom);
 
+  // Set the initial center of the map
+  params.center = userParams.center || [0.5, 0.5], // X, Y in map coordinates
   params.center[0] = Math.min(Math.max(0.0, params.center[0]), 1.0);
   params.center[1] = Math.min(Math.max(0.0, params.center[1]), 1.0);
 

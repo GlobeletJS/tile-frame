@@ -3,12 +3,13 @@ import { initTileCoords } from "./coords.js";
 import { initRenderer   } from "./renderer.js";
 import { initTileMetric } from "./tilemetric.js";
 
-export function init(userParams, context, getTile) {
-  const params = setParams(userParams, context);
+export function init(userParams) {
+  const params = setParams(userParams);
+  const getTile = userParams.getTile;
   if (!params) return;
 
   const coords = initTileCoords(params);
-  const renderer = initRenderer(context, params);
+  const renderer = initRenderer(params);
 
   const oneTileComplete = 1. / params.nx / params.ny;
   var complete = 0.0;
@@ -16,6 +17,8 @@ export function init(userParams, context, getTile) {
   const boxes = Array.from(Array(params.ny), () => []);
 
   return {
+    canvas: params.context.canvas,
+
     // Report status or data
     loaded: () => complete,
     getTilePos,

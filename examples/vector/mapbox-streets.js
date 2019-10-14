@@ -1,4 +1,4 @@
-export const params = Object.freeze({
+export const params = {
   // URL of a Mapbox Style document
   style: "mapbox://styles/mapbox/streets-v8",
 
@@ -14,4 +14,4 @@ export const params = Object.freeze({
   // Size of map to display, in pixels
   width: 1024,
   height: 1024,
-});
+};

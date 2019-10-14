@@ -4,7 +4,6 @@ import * as tileKiln from 'tile-kiln';
 import { cacheTileKiln } from 'tile-rack';
 import * as tileFrame from "../../dist/tile-frame.bundle.js";
 import { params } from "./mapbox-streets.js";
-//import { params } from "./mapbox-ukiyo-e.js";
 import * as projection from "./proj-mercator.js";
 import * as mapOverlay from 'map-overlay';
 
@@ -12,14 +11,15 @@ const degrees = 180.0 / Math.PI;
 
 export function main() {
   // Setup 2D map
-  const display = document.getElementById("rasterCanvas").getContext("2d");
   const factory = tileKiln.init({
     size: params.tileSize,
     style: params.style,
     token: params.token,
   });
   const cache = cacheTileKiln(params.tileSize, factory);
-  const map = tileFrame.init(params, display, cache.retrieve);
+  params.getTile = cache.retrieve;
+  params.context = document.getElementById("rasterCanvas").getContext("2d");
+  const map = tileFrame.init(params);
 
   // Set up bounding box QC overlay
   const overlay = document.getElementById("vectorCanvas");

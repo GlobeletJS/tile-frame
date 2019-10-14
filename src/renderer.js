@@ -1,4 +1,5 @@
-export function initRenderer(context, params) {
+export function initRenderer(params) {
+  const context = params.context;
   const size = params.tileSize;
 
   // Resize drawingbuffer to fit the specified number of tiles
