@@ -1,6 +1,6 @@
 {
   "name": "tile-frame",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Manage a grid of map tiles on an HTML Canvas",
   "main": "dist/tile-frame.bundle.js",
   "module": "dist/tile-frame.bundle.js",
