@@ -36,7 +36,7 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^4.2.4",
     "tile-kiln": "^0.1.2",
-    "tile-rack": "^0.2.1",
+    "tile-rack": "^0.2.2",
     "touch-sampler": "0.0.1"
   },
   "dependencies": {}

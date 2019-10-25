@@ -66,7 +66,7 @@ export function main() {
   requestAnimationFrame(checkRender);
   function checkRender(time) {
     map.drawTiles();
-    var numTiles = cache.prune(map.tileDistance, 1.5);
+    var numTiles = cache.trim(map.tileDistance, 1.5);
     factory.sortTasks(cache.getPriority);
 
     // Report loading status

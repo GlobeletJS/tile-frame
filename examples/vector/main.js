@@ -76,7 +76,7 @@ export function main() {
   requestAnimationFrame(checkRender);
   function checkRender(time) {
     map.drawTiles();
-    cache.prune(map.tileDistance, 2.0);
+    cache.trim(map.tileDistance, 2.0);
     factory.sortTasks(cache.getPriority);
 
     var percent = map.loaded() * 100;
