@@ -1,6 +1,8 @@
 export function setParams(userParams) {
   const params = {};
 
+  params.getTile = userParams.getTile;
+
   params.tileSize = userParams.tileSize || 512;
 
   // Get canvas context, and set width/height parameters
