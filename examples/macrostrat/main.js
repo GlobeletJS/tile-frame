@@ -2,7 +2,7 @@
 
 import * as tileKiln from 'tile-kiln';
 import { cacheTileKiln } from 'tile-rack';
-import * as tileFrame from "../../dist/tile-frame.bundle.js";
+import * as tileFrame from "../../src/index.js";
 import { params } from "./macrostrat.js";
 import { initTouch } from 'touch-sampler';
 import { initSelector } from "./selection.js";

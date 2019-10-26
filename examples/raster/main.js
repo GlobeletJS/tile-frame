@@ -1,7 +1,7 @@
 'use strict';
 
 import { initRasterCache } from 'tile-rack';
-import * as tileFrame from "../../dist/tile-frame.bundle.js";
+import * as tileFrame from "../../src/index.js";
 import { params } from "./mapbox-satellite.js";
 import * as projection from "./proj-mercator.js";
 import * as mapOverlay from 'map-overlay';

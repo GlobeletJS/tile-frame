@@ -2,18 +2,14 @@
   "name": "tile-frame",
   "version": "1.0.0",
   "description": "Manage a grid of map tiles on an HTML Canvas",
-  "main": "dist/tile-frame.bundle.js",
-  "module": "dist/tile-frame.bundle.js",
+  "module": "src/index.js",
   "files": [
-    "dist"
+    "src"
   ],
   "directories": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run build-module && npm run build-examples",
-    "build-module": "npm run rollup-module",
-    "rollup-module": "rollup -c build/rollup.config.js",
-    "build-examples": "npm run rollup-examples && npm run copy-worker",
+    "build": "npm run rollup-examples && npm run copy-worker",
     "rollup-examples": "cd examples && rollup -c",
     "copy-worker": "echo examples/*/ | xargs -n 1 cp node_modules/tile-kiln/dist/worker.bundle.js",
     "postversion": "git push && git push --tags"

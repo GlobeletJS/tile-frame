@@ -2,7 +2,7 @@ import { setParams      } from "./params.js";
 import { initTileCoords } from "./coords.js";
 import { initRenderer   } from "./renderer.js";
 import { initGrid       } from "./grid.js";
-import { initTileMetric } from "./tilemetric.js";
+import { initTileMetric } from "./tile-metric.js";
 
 export function init(userParams) {
   const params = setParams(userParams);
