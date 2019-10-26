@@ -26,6 +26,8 @@ scene.
 - [Vector tiles example](https://globeletjs.github.io/tile-frame/examples/vector/index.html) 
   (using [tile-kiln](https://github.com/GlobeletJS/tile-kiln) for rendering)
 - [Interactive vector tiles example](https://globeletjs.github.io/tile-frame/examples/macrostrat/index.html) with JSON querying
+- [Example usage as a texture manager](https://globeletjs.github.io/satellite-view/examples/stamen/index.html) 
+  (inside [satellite-view](https://github.com/GlobeletJS/satellite-view))
 
 ## Installation
 tile-frame is provided as an ESM module import.
