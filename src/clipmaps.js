@@ -26,6 +26,8 @@ export function initClipMaps(mapParams, nLod) {
 
     setCenterZoom,
     tileDistance: (tile) => Math.min(...frames.map(f => f.tileDistance(tile))),
+
+    destroy: () => textures.forEach(tex => tex.canvas.remove()),
   };
 
   function getTilePos(globalXY) {
