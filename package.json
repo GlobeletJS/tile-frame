@@ -1,6 +1,6 @@
 {
   "name": "tile-frame",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Manage a grid of map tiles on an HTML Canvas",
   "module": "src/index.js",
   "files": [
