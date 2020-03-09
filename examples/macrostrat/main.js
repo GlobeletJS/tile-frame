@@ -1,7 +1,7 @@
 'use strict';
 
 import * as tileKiln from 'tile-kiln';
-import { cacheTileKiln } from 'tile-rack';
+import { initCache } from 'tile-rack';
 import * as tileFrame from "../../src/index.js";
 import { params } from "./macrostrat.js";
 import { initTouch } from 'touch-sampler';
@@ -17,7 +17,7 @@ export function main() {
     style: params.style,
     token: params.token,
   });
-  const cache = cacheTileKiln(params.tileSize, factory);
+  const cache = initCache(params.tileSize, factory);
   params.getTile = cache.retrieve;
   params.context = document.getElementById("rasterCanvas").getContext("2d");
   const map = tileFrame.init(params);
@@ -47,16 +47,26 @@ export function main() {
 
   // Set up toggle for Burwell polygon visibility
   var burwellVisibility = true;
+  var burwellLayers = [];
+  factory.promise.then(api => {
+    burwellLayers = api.style.layers
+      .filter(layer => layer.source === "burwell")
+      .map(l => l.id);
+  });
   var toggleBurwell = document.getElementById("toggleBurwell");
   toggleBurwell.addEventListener("click", function(click) {
     burwellVisibility = !burwellVisibility;
-    if (burwellVisibility) {
-      cache.showGroup("burwell");
-    } else {
-      cache.hideGroup("burwell");
-    }
+    setVisibility(burwellLayers, burwellVisibility);
     map.reset();
   }, false);
+
+  function setVisibility(layers, visibility) {
+    const setter = (visibility)
+      ? factory.showLayer
+      : factory.hideLayer;
+    layers.forEach( layer => setter(layer) );
+    cache.process( tile => { tile.rendered = false; } );
+  }
 
   // Get ready to print out feature info
   const selector = initSelector(params.tileSize, map);
@@ -70,23 +80,22 @@ export function main() {
     factory.sortTasks(cache.getPriority);
 
     // Report loading status
-    var percent = map.loaded() * 100;
-    loaded.innerHTML = (percent < 100)
-      ? "Loading: " + percent.toFixed(0) + "%"
-      : "Complete! 100%";
-
-    // Find the well nearest to the cursor
-    var box = mapDiv.getBoundingClientRect();
-    var x = cursor.x() - box.left;
-    var y = cursor.y() - box.top;
-    var selected = selector(x, y, 5, "burwell", "units");
-
-    info.innerHTML = "Active draw calls: " + factory.activeDrawCalls() + "<br>";
-    info.innerHTML += "Tiles in cache: " + numTiles + "<br>";
-
-    info.innerHTML += (selected && selected.properties)
-      ? "<pre>" + JSON.stringify(selected.properties, null, 2) + "</pre>"
-      : "";
+//    var percent = map.loaded() * 100;
+//    loaded.innerHTML = (percent < 100)
+//      ? "Loading: " + percent.toFixed(0) + "%"
+//      : "Complete! 100%";
+//
+//    // Find the well nearest to the cursor
+//    var box = mapDiv.getBoundingClientRect();
+//    var x = cursor.x() - box.left;
+//    var y = cursor.y() - box.top;
+//    var selected = selector(x, y, 5, "burwell", "burwell_fill");
+//
+//    info.innerHTML = "Tiles in cache: " + numTiles + "<br>";
+//
+//    info.innerHTML += (selected && selected.properties)
+//      ? "<pre>" + JSON.stringify(selected.properties, null, 2) + "</pre>"
+//      : "";
 
     requestAnimationFrame(checkRender);
   }

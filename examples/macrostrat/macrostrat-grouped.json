@@ -106,6 +106,7 @@
       "filter": ["!=", "color", ""],
       "minzoom": 0,
       "maxzoom": 16,
+      "interactive": true,
       "paint": {
         "fill-color": {
           "property": "color",

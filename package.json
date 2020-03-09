@@ -9,9 +9,7 @@
   "directories": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run rollup-examples && npm run copy-worker",
-    "rollup-examples": "cd examples && rollup -c",
-    "copy-worker": "echo examples/*/ | xargs -n 1 cp node_modules/tile-kiln/dist/worker.bundle.js",
+    "build-examples": "cd examples && rollup -c",
     "postversion": "git push && git push --tags"
   },
   "repository": {
@@ -26,12 +24,12 @@
   "license": "MIT",
   "devDependencies": {
     "@turf/boolean-point-in-polygon": "^6.0.1",
-    "http-server": "^0.11.1",
+    "http-server": "^0.12.1",
     "map-overlay": "github:jjhembd/map-overlay",
-    "rollup": "^1.23.1",
+    "rollup": "^1.32.1",
     "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^4.2.4",
-    "tile-kiln": "^0.1.2",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "tile-kiln": "github:GlobeletJS/tile-kiln#mixer",
     "tile-rack": "^0.2.2",
     "touch-sampler": "0.0.1"
   },
