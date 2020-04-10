@@ -24,9 +24,8 @@
   "license": "MIT",
   "devDependencies": {
     "@turf/boolean-point-in-polygon": "^6.0.1",
-    "http-server": "^0.12.1",
     "map-overlay": "github:jjhembd/map-overlay",
-    "rollup": "^1.32.1",
+    "rollup": "^2.4.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "tile-kiln": "github:GlobeletJS/tile-kiln#mixer",
