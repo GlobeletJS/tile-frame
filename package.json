@@ -23,14 +23,13 @@
   "author": "Jeshurun Hembd",
   "license": "MIT",
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.1.3",
     "@turf/boolean-point-in-polygon": "^6.0.1",
-    "map-overlay": "github:jjhembd/map-overlay",
-    "rollup": "^2.4.0",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
+    "map-overlay": "^0.0.2",
+    "rollup": "^2.66.1",
     "tile-kiln": "github:GlobeletJS/tile-kiln#mixer",
     "tile-rack": "^0.2.2",
-    "touch-sampler": "0.0.1"
-  },
-  "dependencies": {}
+    "touch-sampler": "^0.0.4"
+  }
 }
